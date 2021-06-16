@@ -1,0 +1,199 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Nosifer", cursive;
+}
+html {
+  cursor: url("/css_files/Images/Staff\ of\ Horror.cur"), auto;
+}
+body {
+  background: url("/css_files/brown-room.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.page-title {
+  font-size: 70px;
+  font-weight: bold;
+  color: orangered;
+  text-align: center;
+  margin: 6rem;
+}
+.overlay-text {
+  display: none;
+}
+
+.overlay-text.visible {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: orangered;
+  display: flex;
+  flex-direction: column;
+  animation-name: overlay-grow;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes overlay-grow {
+  from {
+    font-size: 0px;
+    background: transparent;
+  }
+  to {
+    font-size: 70px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.671);
+  }
+}
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 10px;
+  margin: 50px;
+  justify-content: center;
+  perspective: 500px;
+  perspective-origin: center center;
+}
+.game-info-container {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+}
+.game-info {
+  font-size: 35px;
+  color: rgb(214, 214, 66);
+}
+
+.card {
+  height: 175px;
+  width: 125px;
+  position: relative;
+}
+.card:hover {
+  cursor: url("/css_files/Images/Horror.cur"), auto;
+}
+.card-face {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  /* the display property of the flipped side ie back side is set to none */
+  transition: transform 0.5s ease-in-out;
+}
+
+.card-value {
+  transform: scale(0.9);
+  transition: transform 0.2s ease-in;
+}
+.card-front:hover .card-value {
+  transform: scale(1);
+}
+.card .card-back {
+  transform: rotateY(0deg);
+  background: black;
+  border-color: rgb(231, 65, 0);
+}
+.card .card-front {
+  transform: rotateY(180deg);
+  background: rgb(241, 187, 139);
+  border-color: black;
+}
+
+.card.visible .card-back {
+  transform: rotateY(-180deg);
+}
+.card.visible .card-front {
+  transform: rotateY(0deg);
+}
+
+.card.matched .card-value {
+  animation-name: dance;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.5s;
+  animation-timing-function: linear;
+  /* starts after card completes flip operation */
+}
+
+@keyframes dance {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+}
+
+.cob-web {
+  height: 47px;
+  width: 47px;
+  transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+.card-face:hover .cob-web {
+  height: 53px;
+  width: 53px;
+}
+
+.cob-web-top-left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: rotate(270deg);
+}
+.cob-web-top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.cob-web-bottom-left {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  transform: rotate(180deg);
+}
+.cob-web-bottom-right {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  transform: rotate(90deg);
+}
+.spider {
+  align-self: flex-start;
+  transform: translateY(-10px);
+  /* location on return trip after hover */
+  transition: transform 0.5s ease-in-out;
+}
+.card-back:hover .spider {
+  transform: translateY(0px);
+}
+
+@media (max-width: 600px) {
+  .game-container {
+    grid-template-columns: repeat(2, auto);
+  }
+  .game-info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
