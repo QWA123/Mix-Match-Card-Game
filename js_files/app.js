@@ -85,7 +85,7 @@ class MixOrMatch {
 
       // if conditions
       if (this.cardToCheck != null) {
-        this.checkForCardMatch(card);
+        setTimeout(() => this.checkForCardMatch(card), 100);
       } else {
         this.cardToCheck = card;
       }
